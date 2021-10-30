@@ -6,7 +6,7 @@ import os
 import warnings
 import sqlalchemy as sa
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import registry
 from sqlalchemy.orm import sessionmaker, column_property
 from sqlalchemy_continuum import (
     ClassNotVersioned,
@@ -81,7 +81,7 @@ class TestCase(object):
         }
 
     def setup_method(self, method):
-        self.Model = declarative_base()
+        self.Model = registry().generate_base()
         make_versioned(options=self.options)
 
         driver = os.environ.get('DB', 'sqlite')

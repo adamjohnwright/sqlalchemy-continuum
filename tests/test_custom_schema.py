@@ -2,14 +2,14 @@ import os
 import sqlalchemy as sa
 from six import PY3
 from pytest import mark
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import registry
 from tests import TestCase
 
 
 @mark.skipif("os.environ.get('DB') == 'sqlite'")
 class TestCustomSchema(TestCase):
     def create_models(self):
-        self.Model = declarative_base(metadata=sa.MetaData(schema='continuum'))
+        self.Model = registery(metadata=sa.MetaData(schema='continuum')).declarative_base()
 
         class Article(self.Model):
             __tablename__ = 'article'

@@ -7,6 +7,8 @@ except ImportError:
     from ordereddict import OrderedDict
 import six
 import sqlalchemy as sa
+from sqlalchemy.orm import registry
+
 from sqlalchemy.ext.compiler import compiles
 
 from .dialects.postgresql import (
@@ -132,7 +134,7 @@ class TransactionFactory(ModelFactory):
 
             if manager.user_cls:
                 user_cls = manager.user_cls
-                registry = manager.declarative_base._decl_class_registry
+                registry = sqlalchemy.orm.registry
 
                 if isinstance(user_cls, six.string_types):
                     try:

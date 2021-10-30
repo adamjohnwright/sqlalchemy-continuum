@@ -1,7 +1,7 @@
 from copy import copy
 import six
 import sqlalchemy as sa
-from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import declared_attr
 from sqlalchemy.orm import column_property
 from sqlalchemy_utils.functions import get_declarative_base
 

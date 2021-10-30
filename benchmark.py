@@ -5,7 +5,7 @@ from time import time
 
 import sqlalchemy as sa
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import registry
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_continuum import (
     make_versioned,
@@ -37,7 +37,7 @@ def test_versioning(
     transaction_cls = TransactionFactory()
     user_cls = None
 
-    Model = declarative_base()
+    Model = registry.generate_base()
 
     options = {
         'create_models': True,
